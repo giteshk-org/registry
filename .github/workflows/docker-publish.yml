@@ -34,8 +34,14 @@ env:
   PASSWORD: ${{ secrets.GITHUB_TOKEN }}
   DOCKER_REPOSITORY_OWNER: ${{github.repository_owner}}
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
   build-registry-server:
     runs-on: ubuntu-latest
+    needs: setup
     steps:
     - uses: ./.github/workflows/composite/build-push-action
       with:
@@ -48,6 +54,7 @@ jobs:
 
   build-registry-tool:
     runs-on: ubuntu-latest
+    needs: setup
     steps:
     - uses: ./.github/workflows/composite/build-push-action
       with:
@@ -73,6 +80,7 @@ jobs:
 
   build-registry-envoy:
     runs-on: ubuntu-latest
+    needs: setup
     steps:
     - uses: ./.github/workflows/composite/build-push-action
       with:
