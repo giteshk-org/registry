@@ -50,6 +50,11 @@ runs:
       uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
       with:
         images: ${{ inputs.registry }}/${{ inputs.image }}
+        tags: |
+          type=ref,event=branch
+          type=ref,event=tag
+          type=schedule,pattern=nightly
+          type=raw,latest
 
     - name: Build and push registry-server Docker image
       uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
