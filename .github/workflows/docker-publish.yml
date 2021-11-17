@@ -76,6 +76,8 @@ jobs:
         image: ${{ env.DOCKER_REPOSITORY_OWNER }}/registry-linter
         context: .
         file: containers/registry-linter/Dockerfile
+        build-args: |
+          REGISTRY_TOOL_IMAGE=${{ env.REGISTRY }}/${{ env.DOCKER_REPOSITORY_OWNER }}/registry-tool:latest
 
   build-registry-envoy:
     runs-on: ubuntu-latest
