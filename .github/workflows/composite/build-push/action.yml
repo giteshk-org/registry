@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: 'Registry Image Generator'
+name: 'Build and Push image'
 description: 'Composite action to generate registry images'
 inputs:
   registry:
