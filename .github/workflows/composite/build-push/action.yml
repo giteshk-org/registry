@@ -35,6 +35,9 @@ inputs:
   file:
     description: 'Path to the docker file relative to context'
     required: true
+  build-args:
+    description: 'Build arguments for docker'
+    required: false
 runs:
   using: "composite"
   steps:
