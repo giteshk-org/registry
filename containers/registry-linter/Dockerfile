@@ -36,6 +36,7 @@ RUN git clone https://github.com/google/gnostic
 RUN cd gnostic && go install ./...
 
 # Final image
+ARG REGISTRY_TOOL_IMAGE
 FROM $REGISTRY_TOOL_IMAGE
 
 # Install spectral linter
