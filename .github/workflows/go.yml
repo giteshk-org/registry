@@ -18,11 +18,9 @@ on:
   push:
     branches:
     - main
-    - codecov-changes
   pull_request:
     branches:
     - main
-    - codecov-changes
 jobs:
   build:
     name: Build
@@ -90,10 +88,6 @@ jobs:
         APG_REGISTRY_ADDRESS: localhost:8080
         APG_REGISTRY_AUDIENCES: http://localhost:8080
         APG_REGISTRY_INSECURE: 1
-        PGHOST: localhost
-        PGPORT: 5432
-        PGUSER: postgres
-        PGPASSWORD: postgres
       run: |
         go clean -testcache
         go test -race -coverprofile=coverage.txt -covermode=atomic ./...
