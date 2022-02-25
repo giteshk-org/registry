@@ -19,7 +19,7 @@
 # https://hub.docker.com/_/golang
 FROM golang:1.17 as builder
 RUN apt-get update
-RUN apt-get install unzip
+RUN apt-get install unzip wget
 
 # Create and change to the app directory.
 WORKDIR /app
@@ -40,6 +40,15 @@ RUN ./tools/FETCH-PROTOC.sh
 RUN make apg
 RUN CGO_ENABLED=0 GOOS=linux go build -v -o apg ./cmd/apg
 
+# Build spectral plugin
+RUN go build -o registry-lint-spectral ./cmd/registry/plugins/registry-lint-spectral
+
+# Install spectral linter
+WORKDIR /spectral-linter
+RUN wget -q https://github.com/stoplightio/spectral/releases/download/v5.9.2/spectral-linux \
+               -O spectral \
+         && chmod 755 spectral \
+
 # Use the official Alpine image for a lean production container.
 # https://hub.docker.com/_/alpine
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
@@ -53,3 +62,8 @@ RUN apk add --no-cache bash git
 # Copy binaries to the production image from the builder stage.
 COPY --from=builder /app/registry /bin/registry
 COPY --from=builder /app/apg /bin/apg
+
+# Copy linter plugin
+COPY --from=builder /app/registry-lint-spectral /bin/registry-lint-spectral
+# Copy linter binaries
+COPY --from=builder /spectral-linter/spectral /bin/
