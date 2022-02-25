@@ -44,10 +44,9 @@ RUN CGO_ENABLED=0 GOOS=linux go build -v -o apg ./cmd/apg
 RUN go build -o registry-lint-spectral ./cmd/registry/plugins/registry-lint-spectral
 
 # Install spectral linter
-WORKDIR /spectral-linter
-RUN wget -q https://github.com/stoplightio/spectral/releases/download/v5.9.2/spectral-linux \
-               -O spectral \
-         && chmod 755 spectral \
+RUN mkdir /spectral-linter && wget -q https://github.com/stoplightio/spectral/releases/download/v5.9.2/spectral-linux \
+               -O /spectral-linter/spectral \
+         && chmod 755 /spectral-linter/spectral \
 
 # Use the official Alpine image for a lean production container.
 # https://hub.docker.com/_/alpine
