@@ -19,13 +19,13 @@ import "time"
 // Blob is the storage-side representation of a blob.
 type Blob struct {
 	Key          string    `gorm:"primaryKey"`
-	ProjectID    string    // Uniquely identifies a project.
-	ApiID        string    // Uniquely identifies an API within a project.
-	VersionID    string    // Uniquely identifies a version of an API.
-	SpecID       string    // Uniquely identifies a spec of a version.
-	RevisionID   string    // Uniquely identifies a revision of a spec.
-	DeploymentID string    // Uniquely identifies a deployment of an API.
-	ArtifactID   string    // Uniquely identifies an artifact on a resource.
+	ProjectID    string    `gorm:"index:blob_idx,priority:1"` // Uniquely identifies a project.
+	ApiID        string    `gorm:"index:blob_idx,priority:2"` // Uniquely identifies an API within a project.
+	VersionID    string    `gorm:"index:blob_idx,priority:3"` // Uniquely identifies a version of an API.
+	SpecID       string    `gorm:"index:blob_idx,priority:4"` // Uniquely identifies a spec of a version.
+	RevisionID   string    `gorm:"index:blob_idx,priority:5"` // Uniquely identifies a revision of a spec.
+	DeploymentID string    `gorm:"index:blob_idx,priority:6"` // Uniquely identifies a deployment of an API.
+	ArtifactID   string    `gorm:"index:blob_idx,priority:7"` // Uniquely identifies an artifact on a resource.
 	Hash         string    // Hash of the blob contents.
 	SizeInBytes  int32     // Size of the blob contents.
 	Contents     []byte    // The contents of the blob.

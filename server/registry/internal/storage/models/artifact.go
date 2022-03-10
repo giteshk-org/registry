@@ -29,12 +29,12 @@ import (
 // Artifact is the storage-side representation of an artifact.
 type Artifact struct {
 	Key          string    `gorm:"primaryKey"`
-	ProjectID    string    // Project associated with artifact (required).
-	ApiID        string    // Api associated with artifact (if appropriate).
-	VersionID    string    // Version associated with artifact (if appropriate).
-	SpecID       string    // Spec associated with artifact (if appropriate).
-	DeploymentID string    // Deployment associated with artifact (if appropriate).
-	ArtifactID   string    // Artifact identifier (required).
+	ProjectID    string    `gorm:"index:artifact_idx,priority:1"` // Project associated with artifact (required).
+	ApiID        string    `gorm:"index:artifact_idx,priority:2"` // Api associated with artifact (if appropriate).
+	VersionID    string    `gorm:"index:artifact_idx,priority:3"` // Version associated with artifact (if appropriate).
+	SpecID       string    `gorm:"index:artifact_idx,priority:4"` // Spec associated with artifact (if appropriate).
+	DeploymentID string    `gorm:"index:artifact_idx,priority:5"` // Deployment associated with artifact (if appropriate).
+	ArtifactID   string    `gorm:"index:artifact_idx,priority:6"` // Artifact identifier (required).
 	CreateTime   time.Time // Creation time.
 	UpdateTime   time.Time // Time of last change.
 	MimeType     string    // MIME type of artifact

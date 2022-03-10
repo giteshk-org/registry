@@ -32,14 +32,14 @@ import (
 // Spec is the storage-side representation of a spec.
 type Spec struct {
 	Key                string    `gorm:"primaryKey"`
-	ProjectID          string    // Uniquely identifies a project.
-	ApiID              string    // Uniquely identifies an api within a project.
-	VersionID          string    // Uniquely identifies a version within a api.
-	SpecID             string    // Uniquely identifies a spec within a version.
-	RevisionID         string    // Uniquely identifies a revision of a spec.
+	ProjectID          string    `gorm:"index:spec_idx,priority:1"` // Uniquely identifies a project.
+	ApiID              string    `gorm:"index:spec_idx,priority:2"` // Uniquely identifies an api within a project.
+	VersionID          string    `gorm:"index:spec_idx,priority:3"` // Uniquely identifies a version within a api.
+	SpecID             string    `gorm:"index:spec_idx,priority:4"` // Uniquely identifies a spec within a version.
+	RevisionID         string    `gorm:"index:spec_idx,priority:5"` // Uniquely identifies a revision of a spec.
 	Description        string    // A detailed description.
 	CreateTime         time.Time // Creation time.
-	RevisionCreateTime time.Time // Revision creation time.
+	RevisionCreateTime time.Time `gorm:"index:spec_idx,priority:6,sort:desc"` // Revision creation time.
 	RevisionUpdateTime time.Time // Time of last change.
 	MimeType           string    // Spec format.
 	SizeInBytes        int32     // Size of the spec.
