@@ -26,9 +26,9 @@ import (
 // Version is the storage-side representation of a version.
 type Version struct {
 	Key         string    `gorm:"primaryKey"`
-	ProjectID   string    // Uniquely identifies a project.
-	ApiID       string    // Uniquely identifies an api within a project.
-	VersionID   string    // Uniquely identifies a version wihtin a api.
+	ProjectID   string    `gorm:"index:version_idx,priority:1"` // Uniquely identifies a project.
+	ApiID       string    `gorm:"index:version_idx,priority:2"` // Uniquely identifies an api within a project.
+	VersionID   string    `gorm:"index:version_idx,priority:3"` // Uniquely identifies a version wihtin a api.
 	DisplayName string    // A human-friendly name.
 	Description string    // A detailed description.
 	CreateTime  time.Time // Creation time.

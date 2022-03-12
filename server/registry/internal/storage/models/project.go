@@ -26,7 +26,7 @@ import (
 // Project is the storage-side representation of a project.
 type Project struct {
 	Key         string    `gorm:"primaryKey"`
-	ProjectID   string    // Uniquely identifies a project.
+	ProjectID   string    `gorm:"index:project_idx,priority:1"` // Uniquely identifies a project.
 	DisplayName string    // A human-friendly name.
 	Description string    // A detailed description.
 	CreateTime  time.Time // Creation time.

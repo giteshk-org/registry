@@ -40,7 +40,7 @@ type Spec struct {
 	Description        string    // A detailed description.
 	CreateTime         time.Time // Creation time.
 	RevisionCreateTime time.Time `gorm:"index:spec_idx,priority:6,sort:desc"` // Revision creation time.
-	RevisionUpdateTime time.Time // Time of last change.
+	RevisionUpdateTime time.Time `gorm:"index:spec_idx,priority:7,sort:desc"` // Time of last change.
 	MimeType           string    // Spec format.
 	SizeInBytes        int32     // Size of the spec.
 	Hash               string    // A hash of the spec.
