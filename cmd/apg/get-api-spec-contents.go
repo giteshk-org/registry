@@ -3,13 +3,12 @@
 package main
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/spf13/cobra"
 
-	"fmt"
-
 	"github.com/golang/protobuf/jsonpb"
-
-	"os"
 
 	rpcpb "github.com/apigee/registry/rpc"
 )
@@ -68,7 +67,8 @@ var GetApiSpecContentsCmd = &cobra.Command{
 		if Verbose {
 			fmt.Print("Output: ")
 		}
-		printMessage(resp)
+
+		fmt.Println(string(resp.Data))
 
 		return err
 	},
